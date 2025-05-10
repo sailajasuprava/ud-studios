@@ -17,6 +17,7 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: "4Mb" }));
 
 //ROUTES
+app.use("/api/v1/searches");
 
 //CUSTOM ERROR MESSAGE FOR UNHANDLED ROUTES
 app.all("*", (req, res, next) => {
