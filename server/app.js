@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const AppError = require("./utils/appArror");
 const globalErrorHandler = require("./controllers/errorController");
+const searchRouter = require("./routes/searchRoutes");
 
 const corsOptions = {
   origin: " http://localhost:5173",
@@ -17,7 +18,7 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: "4Mb" }));
 
 //ROUTES
-app.use("/api/v1/searches");
+app.use("/api/v1/searches", searchRouter);
 
 //CUSTOM ERROR MESSAGE FOR UNHANDLED ROUTES
 app.all("*", (req, res, next) => {
