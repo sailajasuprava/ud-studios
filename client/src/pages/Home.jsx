@@ -30,7 +30,7 @@ function Home() {
   return (
     <div className="w-full p-5 grid grid-cols-3 gap-4">
       {images.map((image) => (
-        <ImageCard key={image.id} />
+        <ImageCard key={image.id} image={image} />
       ))}
     </div>
   );
