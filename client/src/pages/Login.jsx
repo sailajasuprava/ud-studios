@@ -4,11 +4,15 @@ function Login() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1> Welcome to Unsplash Explorer</h1>
-      <p>Please login with one of the providers below:</p>
+    <div className="max-w-sm sm:max-w-lg mx-auto p-8 rounded-md shadow-2xl mt-40">
+      <h1 className="text-3xl font-bold"> Log in to Unsplash Explorer</h1>
 
-      <button onClick={handleLogin}>Login with Google</button>
+      <button
+        onClick={handleLogin}
+        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 shadow-md"
+      >
+        Login with Google
+      </button>
       <br />
       <a href="http://localhost:8000/api/auth/github">Login with GitHub</a>
       <br />

@@ -8,12 +8,13 @@ import { useAuth } from "./context/AuthContext";
 
 function App() {
   const { auth } = useAuth();
+  console.log(auth);
 
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={!auth ? <Navigate to="/login" /> : <Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
