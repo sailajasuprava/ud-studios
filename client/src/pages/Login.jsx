@@ -1,22 +1,35 @@
+import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
+
 function Login() {
-  const handleLogin = () => {
+  const handleGoogleLogin = () => {
     window.open("http://localhost:8000/api/auth/google", "_self");
   };
 
   return (
     <div className="max-w-sm sm:max-w-lg mx-auto p-8 rounded-md shadow-2xl mt-40">
-      <h1 className="text-3xl font-bold"> Log in to Unsplash Explorer</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Log in to Unsplash Explorer
+      </h1>
 
-      <button
-        onClick={handleLogin}
-        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 shadow-md"
-      >
-        Login with Google
-      </button>
-      <br />
-      <a href="http://localhost:8000/api/auth/github">Login with GitHub</a>
-      <br />
-      <a href="http://localhost:8000/api/auth/facebook">Login with Facebook</a>
+      <div className="flex flex-col gap-4">
+        <button
+          onClick={handleGoogleLogin}
+          className="w-76 mx-auto flex items-center justify-center gap-3 bg-red-600 text-white font-medium py-2 rounded-md hover:scale-105 duration-300"
+        >
+          <FaGoogle size={20} />
+          Sign in with Google
+        </button>
+
+        <button className="w-76 mx-auto flex items-center justify-center gap-3 bg-black text-white font-medium py-2 rounded-md hover:scale-105 duration-300">
+          <FaGithub size={20} />
+          Sign in with GitHub
+        </button>
+
+        <button className="w-76 mx-auto flex items-center justify-center gap-3 bg-blue-700 text-white font-medium py-2 rounded-md hover:scale-105 duration-300">
+          <FaFacebookF size={20} />
+          Sign in with Facebook
+        </button>
+      </div>
     </div>
   );
 }
