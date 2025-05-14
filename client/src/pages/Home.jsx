@@ -4,13 +4,11 @@ import axios from "../lib/axios";
 import Spinner from "../components/Spinner";
 import ImageCard from "../components/ImageCard";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { auth, setAuth } = useAuth();
-  const navigate = useNavigate();
+  const { auth, setAuth, fetchUser } = useAuth();
 
   const logout = async () => {
     try {
@@ -25,31 +23,16 @@ function Home() {
   };
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get("/auth/me");
-        console.log(res.data.user);
-        setAuth(res.data.user);
-      } catch (err) {
-        setAuth(null);
-        console.log(
-          "User not authenticated",
-          err?.response?.data?.message || err.message
-        );
-      }
-    };
-
     fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     async function fetchImages() {
       try {
-        if (!auth) navigate("/login");
         setIsLoading(true);
         const res = await axios.post(`/searches`);
         setImages(res.data.data);
-        console.log(res.data.data);
       } catch (error) {
         toast.error(error.response.data.message);
       } finally {
@@ -57,16 +40,20 @@ function Home() {
       }
     }
 
-    fetchImages();
-  }, []);
+    if (auth) fetchImages();
+  }, [auth]);
 
   if (isLoading) return <Spinner />;
-  if (!auth) navigate("/login");
 
   return (
     <div>
-      <div>
-        <button onClick={logout}>Log Out</button>
+      <div className="flex justify-end p-4">
+        <button
+          onClick={logout}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        >
+          Log Out
+        </button>
       </div>
       <div className="w-full p-5 grid grid-cols-3 gap-4">
         {images.map((image) => (
