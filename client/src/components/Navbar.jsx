@@ -6,21 +6,20 @@ function NavBar() {
   const { handleSubmit, term, setTerm } = useSearchContext();
 
   return (
-    <div className="flex justify-end p-4">
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-center gap-2 w-full max-w-md mx-auto my-4"
-      >
+    <header className="flex justify-between p-4">
+      <h1 className="text-2xl font-bold">Unsplash API</h1>
+
+      <form onSubmit={handleSubmit} className="flex items-center gap-2">
         <input
           type="text"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
           placeholder="Search images..."
-          className="flex-1 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition duration-200"
+          className="px-4 py-2 cursor-pointer bg-sky-500 text-white rounded-r-md hover:bg-sky-600 transition duration-200"
         >
           Search
         </button>
@@ -28,11 +27,11 @@ function NavBar() {
 
       <button
         onClick={logout}
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        className="bg-black text-white px-4 py-2 cursor-pointer rounded hover:bg-gray-600 duration-300"
       >
         Log Out
       </button>
-    </div>
+    </header>
   );
 }
 
