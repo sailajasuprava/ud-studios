@@ -15,6 +15,19 @@ router.get(
   })
 );
 
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: `${process.env.CLIENT_URL}/`,
+    failureRedirect: `${process.env.CLIENT_URL}/login`,
+  })
+);
+
 router.get("/me", getCurrentUser);
 router.get("/logout", logOut);
 
