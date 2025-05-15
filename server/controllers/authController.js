@@ -1,4 +1,7 @@
 const getCurrentUser = (req, res) => {
+  console.log("Session:", req.session);
+  console.log("user", req.user);
+
   if (req.isAuthenticated()) {
     res.status(200).json({
       status: "success",

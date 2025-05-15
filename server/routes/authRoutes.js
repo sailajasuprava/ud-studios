@@ -11,6 +11,7 @@ router.get(
   passport.authenticate("google", {
     successRedirect: `${process.env.CLIENT_URL}/`,
     failureRedirect: `${process.env.CLIENT_URL}/login`,
+    session: true,
   })
 );
 

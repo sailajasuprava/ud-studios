@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("./config/passport");
 
 const AppError = require("./utils/appArror");
@@ -10,7 +11,7 @@ const searchRouter = require("./routes/searchRoutes");
 const authRouter = require("./routes/authRoutes");
 
 const corsOptions = {
-  origin: " http://localhost:5173",
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
@@ -25,7 +26,16 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+      collectionName: "sessions",
+    }),
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
   })
 );
 

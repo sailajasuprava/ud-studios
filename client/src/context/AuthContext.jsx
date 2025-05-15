@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "../lib/axios";
+import { toast } from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -21,8 +22,20 @@ function AuthProvider({ children }) {
     }
   };
 
+  const logout = async () => {
+    try {
+      await axios.get("/auth/logout", {
+        withCredentials: true,
+      });
+      setAuth(null);
+    } catch (err) {
+      console.log(err.message);
+      toast.error("Logout failed");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ auth, setAuth, fetchUser }}>
+    <AuthContext.Provider value={{ auth, setAuth, fetchUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
