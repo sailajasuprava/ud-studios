@@ -6,7 +6,7 @@ function NavBar() {
   const { handleSubmit, term, setTerm } = useSearchContext();
 
   return (
-    <header className="flex justify-between p-4">
+    <header className="flex justify-between p-6">
       <h1 className="text-2xl font-bold">Unsplash API</h1>
 
       <form onSubmit={handleSubmit} className="flex items-center gap-2">
