@@ -28,9 +28,7 @@ const getUserSearchHistory = async (req, res, next) => {
   try {
     const userId = req.user.oauthID;
 
-    const history = await Search.find({ userId })
-      .sort({ createdAt: -1 })
-      .limit(10);
+    const history = await Search.find({ userId }).sort({ createdAt: -1 });
 
     res.status(200).json({ success: true, data: history });
   } catch (err) {

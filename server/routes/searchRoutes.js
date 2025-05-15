@@ -7,6 +7,6 @@ const {
 const router = express.Router();
 
 router.post("/", createSearch);
-router.post("/history", getUserSearchHistory);
+router.get("/history", getUserSearchHistory);
 
 module.exports = router;

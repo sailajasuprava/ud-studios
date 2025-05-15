@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "../lib/axios";
 import { toast } from "react-hot-toast";
 import { useAuth } from "./AuthContext";
@@ -9,6 +9,7 @@ function SearchProvider({ children }) {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [term, setTerm] = useState("");
+  const [history, setHistory] = useState([]);
   const { auth } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -21,6 +22,21 @@ function SearchProvider({ children }) {
     }
   };
 
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await axios.get("/searches/history");
+        console.log(res.data.data);
+
+        setHistory(res.data.data);
+      } catch (err) {
+        console.error("Error fetching history:", err.message);
+      }
+    };
+
+    fetchHistory();
+  }, []);
+
   return (
     <SearchContext.Provider
       value={{
@@ -31,6 +47,7 @@ function SearchProvider({ children }) {
         term,
         setTerm,
         handleSubmit,
+        history,
       }}
     >
       {children}
