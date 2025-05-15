@@ -14,8 +14,6 @@ const createSearch = async (req, res, next) => {
       `https://api.unsplash.com/search/photos?page=1&query=${term}&client_id=${process.env.UNSPLASH_ACCESS_KEY}`
     );
 
-    console.log(response.data);
-
     res.status(201).json({
       status: "success",
       message: "Search created successfully",
@@ -26,6 +24,21 @@ const createSearch = async (req, res, next) => {
   }
 };
 
+const getUserSearchHistory = async (req, res, next) => {
+  try {
+    const userId = req.user.oauthID;
+
+    const history = await Search.find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    res.status(200).json({ success: true, data: history });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createSearch,
+  getUserSearchHistory,
 };
