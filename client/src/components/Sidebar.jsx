@@ -5,7 +5,7 @@ function Sidebar() {
   console.log(history);
 
   return (
-    <aside className=" bg-gray-200  px-5 pt-20 rounded-lg overflow-x-auto">
+    <aside className=" bg-gray-200  px-5 pt-36 rounded-lg overflow-x-auto">
       <h2 className="text-xl font-semibold mb-4 text-center">Search History</h2>
       <ul className="text-sm space-y-2">
         {history.length > 0 ? (

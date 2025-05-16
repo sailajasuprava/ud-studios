@@ -10,6 +10,7 @@ function SearchProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [term, setTerm] = useState("");
   const [history, setHistory] = useState([]);
+  const [topSearches, setTopSearches] = useState([]);
   const { auth } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -36,6 +37,21 @@ function SearchProvider({ children }) {
     fetchHistory();
   }, []);
 
+  useEffect(() => {
+    const fetchTopSearches = async () => {
+      try {
+        const res = await axios.get("/searches/top-searches", {
+          withCredentials: true,
+        });
+        setTopSearches(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch top searches", err);
+      }
+    };
+
+    fetchTopSearches();
+  }, []);
+
   return (
     <SearchContext.Provider
       value={{
@@ -47,6 +63,7 @@ function SearchProvider({ children }) {
         setTerm,
         handleSubmit,
         history,
+        topSearches,
       }}
     >
       {children}

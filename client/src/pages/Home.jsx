@@ -22,7 +22,6 @@ function Home() {
         : [...prev, imageId]
     );
   };
-  console.log(images);
 
   if (isLoading) return <Spinner />;
 
@@ -34,7 +33,7 @@ function Home() {
         <Sidebar />
 
         {images.length > 0 && (
-          <main className="space-y-6 px-10 pt-24">
+          <main className="space-y-6 px-10  pt-40">
             <h1 className="text-center text-3xl font-semibold">
               "You searched for {term}' - {images.length} results."
             </h1>

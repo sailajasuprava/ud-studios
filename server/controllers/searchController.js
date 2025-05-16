@@ -37,7 +37,30 @@ const getUserSearchHistory = async (req, res, next) => {
   }
 };
 
+const getTopSearches = async (req, res, next) => {
+  try {
+    const topSearches = await Search.aggregate([
+      {
+        $group: {
+          _id: "$term",
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $limit: 5 },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: topSearches,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createSearch,
   getUserSearchHistory,
+  getTopSearches,
 };
