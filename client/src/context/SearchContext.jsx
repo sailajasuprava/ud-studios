@@ -17,6 +17,7 @@ function SearchProvider({ children }) {
     try {
       const res = await axios.post(`/searches`, { term, userId: auth.oauthID });
       setImages(res.data.data);
+      setHistory((prev) => [res.data.newTerm, ...prev]);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -26,8 +27,6 @@ function SearchProvider({ children }) {
     const fetchHistory = async () => {
       try {
         const res = await axios.get("/searches/history");
-        console.log(res.data.data);
-
         setHistory(res.data.data);
       } catch (err) {
         console.error("Error fetching history:", err.message);

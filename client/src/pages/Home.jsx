@@ -30,11 +30,11 @@ function Home() {
     <>
       <NavBar />
 
-      <div className="grid grid-cols-2 min-h-screen">
+      <div className="grid grid-cols-[1fr_4fr] min-h-screen">
         <Sidebar />
 
         {images.length > 0 && (
-          <main className="space-y-6 p-6">
+          <main className="space-y-6 px-10 pt-24">
             <h1 className="text-center text-3xl font-semibold">
               "You searched for {term}' - {images.length} results."
             </h1>

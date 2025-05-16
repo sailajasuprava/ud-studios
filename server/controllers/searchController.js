@@ -5,7 +5,7 @@ const createSearch = async (req, res, next) => {
   try {
     const { term, userId } = req.body;
 
-    await Search.create({
+    const newTerm = await Search.create({
       userId,
       term,
     });
@@ -18,6 +18,7 @@ const createSearch = async (req, res, next) => {
       status: "success",
       message: "Search created successfully",
       data: response.data.results,
+      newTerm,
     });
   } catch (err) {
     next(err);
