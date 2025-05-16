@@ -11,7 +11,7 @@ const searchRouter = require("./routes/searchRoutes");
 const authRouter = require("./routes/authRoutes");
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: process.env.CLIENT_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };

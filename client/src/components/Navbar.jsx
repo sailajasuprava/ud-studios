@@ -4,7 +4,6 @@ import { useSearchContext } from "../context/SearchContext";
 function NavBar() {
   const { logout } = useAuth();
   const { handleSubmit, term, setTerm, topSearches } = useSearchContext();
-  console.log(topSearches);
 
   return (
     <header className="fixed w-full z-[100] ">

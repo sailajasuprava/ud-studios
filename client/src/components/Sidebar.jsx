@@ -2,7 +2,6 @@ import { useSearchContext } from "../context/SearchContext";
 
 function Sidebar() {
   const { history } = useSearchContext();
-  console.log(history);
 
   return (
     <aside className=" bg-gray-200  px-5 pt-36 rounded-lg overflow-x-auto">

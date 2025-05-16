@@ -2,11 +2,11 @@ import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 
 function Login() {
   const handleGoogleLogin = () => {
-    window.open("http://localhost:8000/api/auth/google", "_self");
+    window.open(`${import.meta.env.VITE_SERVER_URL}/api/auth/google`, "_self");
   };
 
   const handleGithubLogin = () => {
-    window.open("http://localhost:8000/api/auth/github", "_self");
+    window.open(`${import.meta.env.VITE_SERVER_URL}/api/auth/github`, "_self");
   };
 
   const handleFacebookLogin = () => {
