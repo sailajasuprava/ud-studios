@@ -17,7 +17,6 @@ const corsOptions = {
 };
 
 const app = express();
-app.set("trust proxy", 1); // Required for secure cookies on Render
 
 //MIDDLEWARES
 app.use(cors(corsOptions));
@@ -33,8 +32,7 @@ app.use(
       collectionName: "sessions",
     }),
     cookie: {
-      sameSite: "none",
-      secure: true,
+      secure: false,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
